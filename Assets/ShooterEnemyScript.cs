@@ -10,10 +10,11 @@ public class ShooterEnemyScript : MonoBehaviour
     public GameObject Player;
     [SerializeField]
     private float spread = 10;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

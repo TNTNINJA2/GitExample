@@ -21,7 +21,7 @@ public class ProjectileScript : MonoBehaviour
     {
         rotation = transform.rotation.z;
         transform.Translate(new Vector3(Mathf.Sin(Mathf.Deg2Rad * rotation)*movespeed, Mathf.Cos(Mathf.Deg2Rad * rotation)*movespeed));
-        if (timer < 8)
+        if (timer < 5)
         {
             timer = timer + Time.deltaTime;
         }
