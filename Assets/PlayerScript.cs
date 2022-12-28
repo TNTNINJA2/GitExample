@@ -9,8 +9,11 @@ public class PlayerScript : MonoBehaviour
     public float turnRate;
     public float slowSpeed;
     public float fastSpeed;
+    public bool isAlive = true;
     public InputAction turningControls;
     public InputAction speedControls;
+    public Collider2D hitbox;
+    public Collider2D hurtbox;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,34 +36,46 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
 
+        if (isAlive)
+        {
+            float speedModifier;
 
-        float speedModifier;
+            if (speedControls.ReadValue<float>() == 1)
+            {
+                speedModifier = fastSpeed;
+            }
+            else if (speedControls.ReadValue<float>() == -1)
+            {
+                speedModifier = slowSpeed;
+            }
+            else
+            {
+                speedModifier = 1;
+            }
+            
+            transform.Translate(new Vector3(
+                (float)(Mathf.Sin(Mathf.Deg2Rad * transform.rotation.z) * moveSpeed * speedModifier * 0.01 * Time.deltaTime),
+                (float)(Mathf.Cos(Mathf.Deg2Rad * transform.rotation.z) * moveSpeed * speedModifier * 0.01 * Time.deltaTime),
+                0));
 
-        if (speedControls.ReadValue<float>() == 1)
-        {
-            speedModifier = fastSpeed;
-        } else if (speedControls.ReadValue<float>() == -1)
-        {
-            speedModifier = slowSpeed;
-        } else
-        {
-            speedModifier = 1;
+            transform.Rotate(0, 0, turningControls.ReadValue<float>() * -turnRate * Time.deltaTime / (speedModifier / 2));
+            
         }
-        transform.Translate(new Vector3(
-            (float)(Mathf.Sin(Mathf.Deg2Rad * transform.rotation.z) * moveSpeed * speedModifier * 0.01 * Time.deltaTime),
-            (float)(Mathf.Cos(Mathf.Deg2Rad * transform.rotation.z) * moveSpeed * speedModifier * 0.01 * Time.deltaTime),
-            0));
-
-        transform.Rotate(0, 0, turningControls.ReadValue<float>() * -turnRate * Time.deltaTime / (speedModifier / 2));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision has occurred");
-        Debug.Log(collision.GetComponent<GameObject>().name + " is the collider");
-        Debug.Log(collision.GetComponent<GameObject>().name + " is the other collider");
-        //Destroy()
-        //collision.collider.gameObject.tag.Equals("Player")
+
+        if (collision.IsTouching(hurtbox))
+        {
+            isAlive = false;
+        }
+        else if (collision.IsTouching(hitbox))
+        {
+            Destroy(collision);
+        }
+
+
     }
 
     
