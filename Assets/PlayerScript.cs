@@ -65,15 +65,23 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("There has been a collision with " + collision.ToString());
+     
+
 
         if (collision.IsTouching(hurtbox))
         {
+            Debug.Log("It is touching the hurtbox");
             isAlive = false;
         }
         else if (collision.IsTouching(hitbox))
         {
-            Destroy(collision);
+            Debug.Log("It is touching the hitbox");
+            Destroy(collision.gameObject);
+        
         }
+
+        
 
 
     }
