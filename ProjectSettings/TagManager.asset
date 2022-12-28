@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Player Hitbox
   - Player Hurtbox
+  - Logic
+  - Star
   layers:
   - Default
   - TransparentFX

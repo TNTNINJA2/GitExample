@@ -14,6 +14,8 @@ public class PlayerScript : MonoBehaviour
     public InputAction speedControls;
     public Collider2D hitbox;
     public Collider2D hurtbox;
+    [SerializeField]
+    private LogicScript logicScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,19 +68,35 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("There has been a collision with " + collision.ToString());
-     
 
-
-        if (collision.IsTouching(hurtbox))
+        if (collision.gameObject.tag.Equals("Star"))
         {
-            Debug.Log("It is touching the hurtbox");
-            isAlive = false;
+            logicScript.IncreaseScore(1);
+
+            float maxXDiff = 8;
+            float maxYDiff = 3.5f;
+
+            Vector3 newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
+            while ((newPos - transform.position).sqrMagnitude < 9)
+            {
+                newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
+            }
+            collision.gameObject.transform.position = newPos;
         }
-        else if (collision.IsTouching(hitbox))
+        else
         {
-            Debug.Log("It is touching the hitbox");
-            Destroy(collision.gameObject);
-        
+
+            if (collision.IsTouching(hurtbox))
+            {
+                Debug.Log("It is touching the hurtbox");
+                isAlive = false;
+            }
+            else if (collision.IsTouching(hitbox))
+            {
+                Debug.Log("It is touching the hitbox");
+                Destroy(collision.gameObject);
+
+            }
         }
 
         

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    public CircleCollider2D circleCollider2D;
     [SerializeField]
     private GameObject player;
     [SerializeField]
