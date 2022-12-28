@@ -54,12 +54,11 @@ public class PlayerScript : MonoBehaviour
         transform.Rotate(0, 0, turningControls.ReadValue<float>() * -turnRate * Time.deltaTime / (speedModifier / 2));
     }
 
-
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collision has occurred");
-        Debug.Log(collision.collider.gameObject.name + " is the collider");
-        Debug.Log(collision.otherCollider.gameObject.name + " is the other collider");
+        Debug.Log(collision.GetComponent<GameObject>().name + " is the collider");
+        Debug.Log(collision.GetComponent<GameObject>().name + " is the other collider");
         //Destroy()
         //collision.collider.gameObject.tag.Equals("Player")
     }
