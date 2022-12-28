@@ -24,12 +24,14 @@ public class PlayerScript : MonoBehaviour
 
     private void OnEnable()
     {
+        // enable controls (mandatory for controls to work)
         turningControls.Enable();
         speedControls.Enable();
     }
 
     private void OnDisable()
     {
+        // disable controls (mandatory for controls to work)
         turningControls.Disable();
         speedControls.Disable();
     }
@@ -42,6 +44,7 @@ public class PlayerScript : MonoBehaviour
         {
             float speedModifier;
 
+            // Determine the speed modifier based on what keys are pressed.
             if (speedControls.ReadValue<float>() == 1)
             {
                 speedModifier = fastSpeed;
@@ -55,11 +58,13 @@ public class PlayerScript : MonoBehaviour
                 speedModifier = 1;
             }
             
+            // move forward by an amount determined by the speedModifier
             transform.Translate(new Vector3(
                 (float)(Mathf.Sin(Mathf.Deg2Rad * transform.rotation.z) * moveSpeed * speedModifier * 0.01 * Time.deltaTime),
                 (float)(Mathf.Cos(Mathf.Deg2Rad * transform.rotation.z) * moveSpeed * speedModifier * 0.01 * Time.deltaTime),
                 0));
 
+            // Turn based  on control input and turn tighter the lower the speedModifier
             transform.Rotate(0, 0, turningControls.ReadValue<float>() * -turnRate * Time.deltaTime / (speedModifier / 2));
             
         }
@@ -67,8 +72,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("There has been a collision with " + collision.ToString());
-
+        // If the other gameObject is a Star, increase the score and respawn the star away from the player, but not near the edge
         if (collision.gameObject.tag.Equals("Star"))
         {
             logicScript.IncreaseScore(1);
@@ -85,17 +89,17 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-
+            // if player was hit
             if (collision.IsTouching(hurtbox))
             {
-                Debug.Log("It is touching the hurtbox");
+                // TODO: add gameover screen and enable it here
+                // TODO: add sound effect
                 isAlive = false;
             }
-            else if (collision.IsTouching(hitbox))
+            else if (collision.IsTouching(hitbox)) // if player hit the object
             {
-                Debug.Log("It is touching the hitbox");
                 Destroy(collision.gameObject);
-
+                // TODO: add sound effect
             }
         }
 
