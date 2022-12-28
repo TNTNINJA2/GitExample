@@ -162,6 +162,7 @@ MonoBehaviour:
   turnRate: 60
   slowSpeed: 0.5
   fastSpeed: 3
+  isAlive: 1
   turningControls:
     m_Name: Turning Controls
     m_Type: 0
@@ -228,6 +229,8 @@ MonoBehaviour:
       m_Action: Speed Controls
       m_Flags: 8
     m_Flags: 0
+  hitbox: {fileID: 770641864}
+  hurtbox: {fileID: 770641866}
 --- !u!50 &770641860
 Rigidbody2D:
   serializedVersion: 4
@@ -309,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770641858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.11604519, y: 0.025217876, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -632,7 +635,7 @@ GameObject:
   m_Layer: 0
   m_Name: Accelerating Enemy
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -774,15 +777,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.64
+      value: 1.6399994
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52113736
+      value: 0.52114105
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0448581
+      value: 0.044858098
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -790,15 +793,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 835669587234656980, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
