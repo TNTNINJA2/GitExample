@@ -72,34 +72,39 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If the other gameObject is a Star, increase the score and respawn the star away from the player, but not near the edge
-        if (collision.gameObject.tag.Equals("Star"))
+        if (isAlive)
         {
-            logicScript.IncreaseScore(1);
+            // If the other gameObject is a Star, increase the score and respawn the star away from the player, but not near the edge
+            if (collision.gameObject.tag.Equals("Star"))
+            {
+                logicScript.IncreaseScore(1);
 
-            float maxXDiff = 7.5f;
-            float maxYDiff = 3.5f;
+                float maxXDiff = 7.5f;
+                float maxYDiff = 3.5f;
 
-            Vector3 newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
-            while ((newPos - transform.position).sqrMagnitude < 9)
-            {
-                newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
+                Vector3 newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
+                while ((newPos - transform.position).sqrMagnitude < 9)
+                {
+                    newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
+                }
+                collision.gameObject.transform.position = newPos;
             }
-            collision.gameObject.transform.position = newPos;
-        }
-        else
-        {
-            // if player was hit
-            if (collision.IsTouching(hurtbox))
+            else
             {
-                // TODO: add gameover screen and enable it here
-                // TODO: add sound effect
-                isAlive = false;
-            }
-            else if (collision.IsTouching(hitbox)) // if player hit the object
-            {
-                Destroy(collision.gameObject);
-                // TODO: add sound effect
+                // if player was hit
+                if (collision.IsTouching(hurtbox))
+                {
+                    // TODO: add gameover screen and enable it here
+                    // TODO: add sound effect
+                    isAlive = false;
+                    logicScript.GameOver();
+                }
+                else if (collision.IsTouching(hitbox)) // if player hit the object
+                {
+                    logicScript.IncreaseKillCount(collision.gameObject.name);
+                    Destroy(collision.gameObject);
+                    // TODO: add sound effect
+                }
             }
         }
 
