@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class AcceleratorEnemyScript : MonoBehaviour
 {
     public CircleCollider2D circleCollider2D;
-    [SerializeField]
-    private GameObject player;
     [SerializeField]
     private Rigidbody2D rigidBody2D;
     [SerializeField]
@@ -14,36 +12,25 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private float decceleration;
     [SerializeField]
-    private float maxSpeed;
+    GameObject player;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Get the direction opposite to it velocity and slow it down in that direction
         Vector3 deccelerationDirection = rigidBody2D.velocity * -decceleration * Time.deltaTime;
-        rigidBody2D.velocity += new Vector2(deccelerationDirection.x, deccelerationDirection.y);
-
+        rigidBody2D.velocity += new Vector2(deccelerationDirection.x, deccelerationDirection.y); 
+        // Get the vector for it to accelerate toward the player 
         Vector3 accelerationDirection = Vector3.Normalize(player.transform.position - 
-            (transform.position + new Vector3(rigidBody2D.velocity.x, rigidBody2D.velocity.y, 0) * 0.5f));
-        accelerationDirection *= acceleration * accelerationDirection.magnitude * Time.deltaTime;
+              (transform.position + new Vector3(rigidBody2D.velocity.x, rigidBody2D.velocity.y, 0) * 0.5f)); 
+        // Increase the magnitude 
+         accelerationDirection *= acceleration * accelerationDirection.magnitude * Time.deltaTime; 
+        // apply the velocity change 
         rigidBody2D.velocity += new Vector2(accelerationDirection.x, accelerationDirection.y);
-        Mathf.Clamp(rigidBody2D.velocity.x, -maxSpeed, maxSpeed);
-        Mathf.Clamp(rigidBody2D.velocity.y, -maxSpeed, maxSpeed);
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("2d collision");
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("3d collision");
     }
 }

@@ -23,6 +23,7 @@ public class LogicScript : MonoBehaviour
 
     public void IncreaseScore(int amount)
     {
+        // increas the score by the amount and updat the score text ui
         score += amount;
         scoreText.text = score.ToString();
     }

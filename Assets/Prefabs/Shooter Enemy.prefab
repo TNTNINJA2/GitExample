@@ -115,6 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 2
-  Projectile: {fileID: 835669587234656976, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
-  Player: {fileID: 0}
+  projectile: {fileID: 835669587234656976, guid: 257e84b6b13eecc4da4efa463b72ac5f, type: 3}
+  player: {fileID: 0}
   spread: 10
