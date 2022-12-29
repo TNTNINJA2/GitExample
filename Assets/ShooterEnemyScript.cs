@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShooterEnemyScript : MonoBehaviour
 {
     public float fireRate = 10;
-    private float timer = 0;
+    private float timer = 1;
     public GameObject projectile;
     public GameObject player;
     [SerializeField]
