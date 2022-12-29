@@ -16,6 +16,13 @@ public class PlayerScript : MonoBehaviour
     public Collider2D hurtbox;
     [SerializeField]
     private LogicScript logicScript;
+    [SerializeField]
+    private GameObject starCollect;
+    [SerializeField]
+    private GameObject playerDeath;
+    [SerializeField]
+    private GameObject enemyDeath;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +84,7 @@ public class PlayerScript : MonoBehaviour
             // If the other gameObject is a Star, increase the score and respawn the star away from the player, but not near the edge
             if (collision.gameObject.tag.Equals("Star"))
             {
+                starCollect.GetComponent<AudioSource>().Play();
                 logicScript.IncreaseScore(1);
 
                 float maxXDiff = 7.5f;
@@ -94,13 +102,13 @@ public class PlayerScript : MonoBehaviour
                 // if player was hit
                 if (collision.IsTouching(hurtbox))
                 {
-                    // TODO: add gameover screen and enable it here
-                    // TODO: add sound effect
+                    playerDeath.GetComponent<AudioSource>().Play();
                     isAlive = false;
                     logicScript.GameOver();
                 }
                 else if (collision.IsTouching(hitbox)) // if player hit the object
                 {
+                    enemyDeath.GetComponent<AudioSource>().Play();
                     logicScript.IncreaseKillCount(collision.gameObject.name);
                     Destroy(collision.gameObject);
                     // TODO: add sound effect
