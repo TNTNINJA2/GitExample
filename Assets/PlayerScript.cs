@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
         {
             logicScript.IncreaseScore(1);
 
-            float maxXDiff = 8;
+            float maxXDiff = 7.5f;
             float maxYDiff = 3.5f;
 
             Vector3 newPos = new Vector3(Random.Range(-maxXDiff, maxXDiff), Random.Range(-maxYDiff, maxYDiff), 0);
