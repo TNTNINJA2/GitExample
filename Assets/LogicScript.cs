@@ -63,11 +63,12 @@ public class LogicScript : MonoBehaviour
 
     public void GameOver()
     {
+        timeSurvived = (float)(int)(timeSurvived * 100) / 100;
 
        statistics.GetComponent<Text>().text =
             "Statistics: \n" +
-            "Score: " + score + "\n" +
-            "Time Survived: " + timeSurvived + "\n" +
+            "Score: " + score + " points\n" +
+            "Time Survived: " + timeSurvived + " seconds\n" +
             "Accelerator Enemty Kills: " + acceleratorKills + "\n" +
             "Shooter Enemty Kills: " + shooterKills + "\n" +
             "Velocity Enemty Kills: " + velocityKills + "\n" +
