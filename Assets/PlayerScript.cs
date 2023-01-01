@@ -101,6 +101,9 @@ public class PlayerScript : MonoBehaviour
             // Turn based  on control input and turn tighter the lower the speedModifier
             transform.Rotate(0, 0, turning * -turnRate * Time.deltaTime / (speedModifier / 2));
             
+        } else if (speed > 0)
+        {
+            logicScript.RestartGame();
         }
     }
 
