@@ -10,8 +10,7 @@ public class PlayerScript : MonoBehaviour
     public float slowSpeed;
     public float fastSpeed;
     public bool isAlive = true;
-    public InputAction turningControls;
-    public InputAction speedControls;
+
     public Collider2D hitbox;
     public Collider2D hurtbox;
     [SerializeField]
@@ -23,24 +22,52 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject enemyDeath;
 
+    public float turning = 0;
+    public float speed = 0;
+
+    InputActions controls;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    private void Awake()
+    {
+        controls = new InputActions();
+
+        controls.Controls.Turning.performed += ctx =>
+        {
+            turning = ctx.ReadValue<float>();
+            Debug.Log("Turning was performed and turning is: " + turning);
+        };
+        controls.Controls.Turning.canceled += ctx =>
+        {
+            turning = 0;
+
+        };
+
+        controls.Controls.Speed.performed += ctx => speed = ctx.ReadValue<float>();
+        controls.Controls.Speed.canceled += ctx => speed = 0;
+    }
+
+    void Turn()
+    {
+
+    }
+
     private void OnEnable()
     {
-        // enable controls (mandatory for controls to work)
-        turningControls.Enable();
-        speedControls.Enable();
+
+        controls.Controls.Enable(); 
     }
 
     private void OnDisable()
     {
         // disable controls (mandatory for controls to work)
-        turningControls.Disable();
-        speedControls.Disable();
+
+        controls.Controls.Disable();
     }
     
     // Update is called once per frame
@@ -52,11 +79,11 @@ public class PlayerScript : MonoBehaviour
             float speedModifier;
 
             // Determine the speed modifier based on what keys are pressed.
-            if (speedControls.ReadValue<float>() == 1)
+            if (speed > 0)
             {
                 speedModifier = fastSpeed;
             }
-            else if (speedControls.ReadValue<float>() == -1)
+            else if (speed < 0)
             {
                 speedModifier = slowSpeed;
             }
@@ -72,7 +99,7 @@ public class PlayerScript : MonoBehaviour
                 0));
 
             // Turn based  on control input and turn tighter the lower the speedModifier
-            transform.Rotate(0, 0, turningControls.ReadValue<float>() * -turnRate * Time.deltaTime / (speedModifier / 2));
+            transform.Rotate(0, 0, turning * -turnRate * Time.deltaTime / (speedModifier / 2));
             
         }
     }

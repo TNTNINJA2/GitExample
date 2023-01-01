@@ -41,18 +41,21 @@ public class LogicScript : MonoBehaviour
     {
         enemyTypeKilled = enemyTypeKilled.Replace("(Clone)", "");
         Debug.Log(enemyTypeKilled + " was killed");
-        totalKills++;
+        
         if (enemyTypeKilled == "Accelerating Enemy")
         {
             acceleratorKills++;
+            totalKills++;
         } 
         if (enemyTypeKilled == "Shooter Enemy")
         {
             shooterKills++;
+            totalKills++;
         }
         if (enemyTypeKilled == "Velocity Enemy")
         {
             velocityKills++;
+            totalKills++;
         }
     }
 

@@ -400,8 +400,8 @@ MonoBehaviour:
   shooterEnemy: {fileID: 7578831049875081406, guid: 48c30e938f06e2e49a491220de6001d1, type: 3}
   velocityEnemy: {fileID: 3712935036193647680, guid: aa6af9e04d737df49981910ebae61f79, type: 3}
   player: {fileID: 770641858}
-  baseSpawnRate: 0.4
-  spawnRateIncrease: 0.1
+  baseSpawnRate: 0.5
+  spawnRateIncrease: 0.03
 --- !u!1 &203327286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,78 +1042,14 @@ MonoBehaviour:
   slowSpeed: 0.5
   fastSpeed: 3
   isAlive: 1
-  turningControls:
-    m_Name: Turning Controls
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8505d6dc-8bb7-4a7c-bbe1-56e42ecf23dd
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: d6746b64-57e5-45b1-8cb2-d61457231700
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Turning Controls
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 4d699efb-a1dc-4fa0-a398-da9507d24080
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Turning Controls
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 8e75c076-3122-4fe5-8ea9-36e968bf0cc3
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Turning Controls
-      m_Flags: 8
-    m_Flags: 0
-  speedControls:
-    m_Name: Speed Controls
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: f4884564-5c7c-4440-b99c-3b2af398a506
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: 0fe27066-e80d-494e-8194-17ba9d5295e4
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Speed Controls
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: eec882b6-4c1f-4f29-8678-e2bc8fca479e
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Speed Controls
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 7d51960f-5389-4187-859b-2637e4dad582
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Speed Controls
-      m_Flags: 8
-    m_Flags: 0
   hitbox: {fileID: 770641864}
   hurtbox: {fileID: 770641866}
   logicScript: {fileID: 878827873}
   starCollect: {fileID: 736612997}
   playerDeath: {fileID: 203327286}
   enemyDeath: {fileID: 34502883}
+  turning: 0
+  speed: 0
 --- !u!50 &770641860
 Rigidbody2D:
   serializedVersion: 4
